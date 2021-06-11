@@ -85,14 +85,7 @@
           audio.controls = true;
           audio.autoplay = true
           audio.src = URL.createObjectURL( dataBlob );
-
-          var link = document.createElement('a');
-          link.href = url;
-          link.download = fileName;
-          link.innerHTML = link.download;
-
           var li = document.createElement('li');
-          li.appendChild(link);
           li.appendChild(audio);
 
           recordingslist.appendChild(li);
@@ -126,6 +119,16 @@
         };
 
         xhr.send();
+
+        var xhr1 = new XMLHttpRequest();
+        xhr1.open("GET", "../"+sessionInput.value+"/60ab5f4842b6a5cf5f4d7984.ogg", true);
+        xhr1.responseType = "arraybuffer";
+
+        xhr1.onload = function(e) {
+          decodeOgg(this.response);
+        };
+
+        xhr1.send();
       }
     };
 

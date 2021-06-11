@@ -4,7 +4,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Decode Example</title>
+  <title>Recording Play</title>
   <style type="text/css">
     ul { list-style: none; }
     li { margin: 1em; }
@@ -13,12 +13,8 @@
 </head>
 
 <body>
-  <h1>Decoder Example</h1>
-  <p>Choose either a file from disk, or a file from a server.</p>
-  <p>File is decoded to pcm buffers and then played back as Riff</p>
-
+  <h1>Recording File Play</h1>
   <h2>Options</h2>
-
   <div>
     <label>Decoder output sample rate</label>
     <input id="sampleRate" type="number" value="8000" />
@@ -30,8 +26,17 @@
   </div>
 
   <h2>Commands</h2>
+  Input Session Id <br>
+  <input type="text" id="sessionInput"/>
+  <br>
+  <br>
+  <button type="button" id="remoteButton">Play session recording</button>
+  <br>
+  <br>
+  OR
+  <br>
+  <br>
   <input type="file" id="fileInput"/>
-  <button type="button" id="remoteButton">Load using XMLHttpRequest</button>
 
   <h2>Recordings</h2>
   <ul id="recordingslist"></ul>
@@ -57,14 +62,9 @@
       });
 
       decoderWorker.onmessage = function(e){
-
-        // null means decoder is finished
         if (e.data === null) {
           wavWorker.postMessage({ command: 'done' });
-        }
-
-        // e.data contains decoded buffers as float32 values
-        else {
+        } else {
           wavWorker.postMessage({
             command: 'encode',
             buffers: e.data

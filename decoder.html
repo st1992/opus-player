@@ -116,15 +116,17 @@
     };
 
     remoteButton.onclick = function(){
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", "./mono.opus", true);
-      xhr.responseType = "arraybuffer";
+      if(sessionInput.value != "") {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "../"+sessionInput.value+"/917507161643.ogg", true);
+        xhr.responseType = "arraybuffer";
 
-      xhr.onload = function(e) {
-        decodeOgg(this.response);
-      };
+        xhr.onload = function(e) {
+          decodeOgg(this.response);
+        };
 
-      xhr.send();
+        xhr.send();
+      }
     };
 
   </script>

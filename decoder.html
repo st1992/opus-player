@@ -14,17 +14,7 @@
 
 <body>
   <h1>Recording File Play</h1>
-  <h2>Options</h2>
-  <div>
-    <label>Decoder output sample rate</label>
-    <input id="sampleRate" type="number" value="8000" />
-  </div>
-
-  <div>
-    <label>Wave file bit depth</label>
-    <input id="bitDepth" type="number" value="16" />
-  </div>
-
+  
   <h2>Commands</h2>
   Input Session Id <br>
   <input type="text" id="sessionInput"/>
@@ -47,7 +37,7 @@
       var typedArray = new Uint8Array(arrayBuffer);
       var decoderWorker = new Worker('./dist/decoderWorker.min.js');
       var wavWorker = new Worker('./dist/waveWorker.min.js');
-      var desiredSampleRate = parseInt(sampleRate.value,10);
+      var desiredSampleRate = parseInt(8000,10);
 
       decoderWorker.postMessage({ 
         command:'init',
@@ -57,7 +47,7 @@
 
       wavWorker.postMessage({ 
         command:'init',
-        wavBitDepth: parseInt(bitDepth.value,10),
+        wavBitDepth: parseInt(16,10),
         wavSampleRate: desiredSampleRate
       });
 

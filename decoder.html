@@ -4,7 +4,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Recording Play</title>
+  <title>OPUS Recording Player</title>
   <style type="text/css">
     ul { list-style: none; }
     li { margin: 1em; }
@@ -14,7 +14,7 @@
 
 <body>
   <h1>Recording File Play</h1>
-  
+
   <h2>Commands</h2>
   Input Session Id <br>
   <input type="text" id="sessionInput"/>
@@ -37,7 +37,7 @@
       var typedArray = new Uint8Array(arrayBuffer);
       var decoderWorker = new Worker('./dist/decoderWorker.min.js');
       var wavWorker = new Worker('./dist/waveWorker.min.js');
-      var desiredSampleRate = parseInt(8000,10);
+      var desiredSampleRate = parseInt(16000,10);
 
       decoderWorker.postMessage({ 
         command:'init',

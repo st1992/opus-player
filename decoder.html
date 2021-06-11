@@ -83,6 +83,7 @@
 
           var audio = document.createElement('audio');
           audio.controls = true;
+          audio.autoplay = true
           audio.src = URL.createObjectURL( dataBlob );
 
           var link = document.createElement('a');
